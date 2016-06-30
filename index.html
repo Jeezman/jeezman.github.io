@@ -1,17 +1,316 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edged">
+    <meta name="description" content="Personal website of Tobi Adeyemi">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
     <title>The Jeezman</title>
-  </head>
-  
-  <body>
-    <nav>
-      <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>CV</li>
-        <li>Blog</li>
-      </ul>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"> -->
+    <!-- <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.teal-light_green.min.css" /> -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
+    <link rel="stylesheet" type="text/css" href="custom.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300|Vollkorn:700' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!-- Start navigation -->
+
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Jeezman.io</a>
+            </div>
+            <!-- collect the nav links, forms and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="smoothScroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="smoothScroll"  href="#projects">Projects</a>
+                    </li>
+                    <li>
+                        <a class="smoothScroll"  href="#">Resume</a>
+                    </li>
+                    <li>
+                        <a class="smoothScroll"  href="#contact">Contact</a>
+                    </li>
+                    <li>
+                        <a class="smoothScroll blog-button"  href="blog.html" >Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
-  </body>
+
+    <!-- end navigation -->
+
+    <!-- page header -->
+    <header class="landscape intro-header">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <img src="img/m2.png" class="img-circle" style="margin-left: 55px; margin-bottom: -7px" alt="my passport" />
+                        <!--            <h1>Clean Blog</h1>-->
+                        <!--            <hr class="small">-->
+                        <span class="subheading">Hi, I'm Olutobi Adeyemi. I love building things.</span>
+                        <!--                        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">-->
+                        <ul class="list-inline text-center">
+                            <li class="hi-icon-wrap hi-icon-effect-3 hi-icon-effect-3b">
+                                <a href="#">
+<!--                                    <span class="fa-stack fa-lg">-->
+<!--                                    <i class="fa fa-circle fa-stack-2x"></i>-->
+                                    <i class="fa fa-twitter hi-icon fa-inverse fa-3x"></i>
+<!--                                </span>-->
+                                </a>
+                            </li>
+                            <li class="hi-icon-wrap hi-icon-effect-3 hi-icon-effect-3b">
+                                <a href="#">
+<!--                                    <span class="fa-stack fa-lg">-->
+<!--                                    <i class="fa fa-circle fa-stack-2x"></i>-->
+                                    <i class="fa fa-facebook hi-icon fa-inverse fa-3x"></i>
+<!--                                </span>-->
+                                </a>
+                            </li>
+                            <li class="hi-icon-wrap hi-icon-effect-3 hi-icon-effect-3b">
+                                <a href="#">
+<!--                                <span class="fa-stack fa-lg ">-->
+<!--                                    <i class="fa fa-circle fa-stack-2x"></i>-->
+                                    <i class="fa fa-github hi-icon fa-inverse fa-3x"></i>
+<!--                                </span>-->
+                            </a>
+                            </li>
+                            <li class="hi-icon-wrap hi-icon-effect-3 hi-icon-effect-3b">
+                                <a href="#">
+<!--                                    <span class="fa-stack fa-lg">-->
+                                    <i class="fa fa-linkedin hi-icon fa-inverse"></i>
+<!--                                </span>-->
+                                </a>
+                            </li>
+                        </ul>
+                        <!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--    <img src="img/2.png" alt="" class="landscape">-->
+    </header>
+    <br id="about"/> <br/>
+
+    <!--    main content-->
+    <div class="container" >
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="about-section text-justified">
+                    <h1>About</h1>
+                    <hr class="about">
+                    <p class="subheading">
+                        Hi there! I'm also called Jeezman (my sobriquet since high school). Welcome to my little portion of the internet universe.
+                    </p>
+                    <p>So, I was born in the Eastern part of Nigeria, Enugu state precisely. Grew up in the city of Port-harcourt, yea we can all agree that I am a certified Port-harcourt boy. and I currently reside in Lagos. I'm also an alumnus of the University of Benin, Edo State, Nigeria.</p>
+                    <p>I am a software developer, an aspiring one. I am passionate about technology and software. I am fascinated by design, nature, photography, gadgets, art, travelling and I love children</p>
+                    <p>
+                        I love to write (I think I'm fair at it). <i>Did you notice the numerous "I am's" in the above paragraph?</i>  Oh well... I hope to inspire and bring out the best in people, one person at a time, eventually making the world a better place, ta da!!
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+<!--    project section-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="project-section" id="projects">
+                    <h1>Projects</h1>
+                    <hr class="about">
+                    <p>I've built and been involved in some really cool stuff, as shown but not limited to the following samples below</p>
+                </div>
+                
+                <div class="col-lg-6 col-md-8" style="height: auto">
+                    <img class="img-thumbnail img-responsive img-center" src="img/affidavits.png" alt="">
+                </div>
+                <div class="col-lg-6 col-md-8" style="height: auto">
+                    <img class="img-thumbnail img-responsive img-center" src="img/ekaette.png" alt="">
+                </div>
+<!--
+                <div class="col-lg-6 col-md-8" style="border: 1px solid black; height: auto">
+                    <img class="img-thumbnail img-responsive img-center" src="img/face.png" alt="">
+                </div>
+-->
+
+<!--
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img class="img-thumbnail img-responsive img-center" src="img/face.png" alt="">
+                        <h2>Marketing Box #1</h2>
+                        <p>These marketing boxes are a great place to put some information. These can contain summaries of what the company does, promotional information, or anything else that is relevant to the company. These will usually be below-the-fold.</p>
+                    </div>
+                    <div class="col-sm-12">
+                        <img class="img-circle img-responsive img-center" src="img/face.png" alt="">
+                        <h2>Marketing Box #2</h2>
+                        <p>These marketing boxes are a great place to put some information. These can contain summaries of what the company does, promotional information, or anything else that is relevant to the company. These will usually be below-the-fold.</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <img class="img-circle img-responsive img-center" src="img/face.png" alt="">
+                        <h2>Marketing Box #3</h2>
+                        <p>These marketing boxes are a great place to put some information. These can contain summaries of what the company does, promotional information, or anything else that is relevant to the company. These will usually be below-the-fold.</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <img class="img-circle img-responsive img-center" src="img/face.png" alt="">
+                        <h2>Marketing Box #4</h2>
+                        <p>These marketing boxes are a great place to put some information. These can contain summaries of what the company does, promotional information, or anything else that is relevant to the company. These will usually be below-the-fold.</p>
+                    </div>
+                </div>
+-->
+
+            </div>
+        </div>
+    </div>
+<!--    end of project section-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="contact-section" id="contact">
+                    <h1>Contact</h1>
+                    <hr class="about">
+                    <p>Want to get in touch with me? Be it work or any fun stuff or just sweet disturbance. Rest assured I'm always interested in hearing from you, because talking is cool.</p>
+                </div>
+
+                <div>
+                    <form action="#">
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Name</label>
+                                <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Email Address</label>
+                                <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+<!--
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Phone Number</label>
+                                <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+-->
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Message</label>
+                                <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    end of main content-->
+
+    <hr>
+
+    <!--    footer-->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Built with <span class="fa-stack fa-lg"><i class="fa fa-heart fa-stack-1x" style="color: red"></i></span> by Olutobi Adeyemi</p>
+                    <p class="copyright text-muted">Copyright &copy; jeezman.io 2016</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--    end of footer-->
+
+
+
+
+
+    <script src="jquery-1.12.4.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="custom.js"></script>
+
+    <!-- <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script> -->
+
+</body>
+
 </html>
