@@ -1,101 +1,81 @@
-import Image from "next/image";
+import { Container } from "@/src/components/Container";
+import { GitHubIcon, XIcon, NostrIcon } from "@/src/components/icons";
+import { GITHUB_URL, NOSTR_URL, X_URL } from "@/src/constants";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+    <Container className="mt-9">
+      <div className="max-w-2xl">
+        <h1 className="text-2xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+          Software engineer. <br />
+          Bitcoin class of &apos;20.
+        </h1>
+        <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
+          I’m Tobi, a software engineer and Bitcoiner based in Nigeria.
+        </p>
+        <p className="mt-1 text-base text-zinc-600 dark:text-zinc-400">
+          Currently work at{" "}
+          <Link
             target="_blank"
-            rel="noopener noreferrer"
+            className="underline hover:no-underline"
+            href="https://hrf.org"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            HRF
+          </Link>{" "}
+          on the{" "}
+          <Link
             target="_blank"
-            rel="noopener noreferrer"
+            className="underline hover:no-underline"
+            href="https://hrf.org/program/financial-freedom/bitcoin-development-fund/"
           >
-            Read our docs
-          </a>
+            Bitcoin Dev fund
+          </Link>{" "}
+          team
+        </p>
+        <div className="mt-8">
+          <b className="text-lg font-bold tracking-tight text-zinc-800 dark:text-zinc-100">
+            Why is Bitcoin important to me?
+          </b>
+          <p className="my-4 text-base text-zinc-600 dark:text-zinc-400">
+            It helps facilitate payments globally. Countries in the global south
+            have been holding the short end of the stick regarding global
+            payments with no hope in sight.
+          </p>
+          <p className="text-base text-zinc-600 dark:text-zinc-400">
+            Bitcoin levels the playing field for everyone, it is privacy first,
+            immune to censorship or limits placed on traditional financial
+            instutions. With the rising rate of inflation, currently above 30%
+            in Nigeria, it has proved to be a more genuine store of value.
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+        <div className="mt-6 flex gap-6">
+          <SocialLink
+            href={GITHUB_URL}
+            aria-label="Follow on GitHub"
+            icon={GitHubIcon}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+          <SocialLink
+            href={NOSTR_URL}
+            aria-label="Follow on Nostr"
+            icon={NostrIcon}
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <SocialLink href={X_URL} aria-label="Follow on X" icon={XIcon} />
+        </div>
+      </div>
+    </Container>
+  );
+}
+
+function SocialLink({
+  icon: Icon,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof Link> & {
+  icon: React.ComponentType<{ className?: string }>;
+}) {
+  return (
+    <Link className="group -m-1 p-1" {...props}>
+      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+    </Link>
   );
 }
