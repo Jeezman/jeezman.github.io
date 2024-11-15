@@ -2,6 +2,7 @@
   "name": "jeezman",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jeezman.github.io/jeezman",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
