@@ -1,9 +1,13 @@
+import { createFileRoute } from "@tanstack/react-router";
 import { Container } from "@/src/components/Container";
 import { GitHubIcon, XIcon, NostrIcon } from "@/src/components/icons";
 import { GITHUB_URL, NOSTR_URL, X_URL } from "@/src/constants";
-import Link from "next/link";
 
-export default function Home() {
+export const Route = createFileRoute("/")({
+  component: Home,
+});
+
+function Home() {
   return (
     <Container className="mt-9">
       <div className="max-w-2xl">
@@ -12,26 +16,18 @@ export default function Home() {
           Bitcoin class of &apos;20.
         </h1>
         <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
-          I’m Tobi, a software engineer and Bitcoiner based in Nigeria.
+          I&apos;m Tobi, a software engineer and Bitcoiner based in Nigeria.
         </p>
         <p className="mt-1 text-base text-zinc-600 dark:text-zinc-400">
-          Currently work at{" "}
-          <Link
+          Currently helping train the next generation of Bitcoin devs at{" "}
+          <a
             target="_blank"
+            rel="noreferrer"
             className="underline hover:no-underline"
-            href="https://hrf.org"
+            href="https://www.btrust.tech"
           >
-            HRF
-          </Link>{" "}
-          on the{" "}
-          <Link
-            target="_blank"
-            className="underline hover:no-underline"
-            href="https://hrf.org/program/financial-freedom/bitcoin-development-fund/"
-          >
-            Bitcoin Dev fund
-          </Link>{" "}
-          team
+            Btrust
+          </a>
         </p>
         <div className="mt-8">
           <b className="text-lg font-bold tracking-tight text-zinc-800 dark:text-zinc-100">
@@ -45,8 +41,8 @@ export default function Home() {
           <p className="text-base text-zinc-600 dark:text-zinc-400">
             Bitcoin levels the playing field for everyone, it is privacy first,
             immune to censorship or limits placed on traditional financial
-            instutions. With the rising rate of inflation, currently above 30%
-            in Nigeria, it has proved to be a more genuine store of value.
+            instutions. With the rising rate of inflation, currently above 30% in
+            Nigeria, it has proved to be a more genuine store of value.
           </p>
         </div>
         <div className="mt-6 flex gap-6">
@@ -70,12 +66,12 @@ export default function Home() {
 function SocialLink({
   icon: Icon,
   ...props
-}: React.ComponentPropsWithoutRef<typeof Link> & {
+}: React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   icon: React.ComponentType<{ className?: string }>;
 }) {
   return (
-    <Link className="group -m-1 p-1" {...props}>
+    <a className="group -m-1 p-1" {...props}>
       <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
-    </Link>
+    </a>
   );
 }

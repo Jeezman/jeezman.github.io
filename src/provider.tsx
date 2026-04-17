@@ -1,11 +1,9 @@
-"use client";
-
 import { createContext, useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
+import { useRouterState } from "@tanstack/react-router";
 import { ThemeProvider, useTheme } from "next-themes";
 
 function usePrevious<T>(value: T) {
-  const ref = useRef<T>();
+  const ref = useRef<T>(undefined as T);
 
   useEffect(() => {
     ref.current = value;
@@ -41,7 +39,7 @@ function ThemeWatcher() {
 export const AppContext = createContext<{ previousPathname?: string }>({});
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const previousPathname = usePrevious(pathname);
 
   return (

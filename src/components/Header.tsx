@@ -1,14 +1,79 @@
-"use client";
-
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useTheme } from "next-themes";
 import clsx from "clsx";
 import { SunIcon, MoonIcon } from "@/src/components/icons";
 import { Container } from "@/src/components/Container";
 import { clamp } from "../utils";
+
+const navLinks = [
+  { to: "/" as const, label: "About" },
+  { to: "/projects" as const, label: "Projects" },
+  { to: "/blog" as const, label: "Blog" },
+  { to: "/contact" as const, label: "Contact" },
+];
+
+function Navigation() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const navRef = useRef<HTMLElement>(null);
+  const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+  const [hasActive, setHasActive] = useState(false);
+
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+    const activeEl = nav.querySelector<HTMLElement>("[data-active]");
+    if (activeEl) {
+      const navRect = nav.getBoundingClientRect();
+      const elRect = activeEl.getBoundingClientRect();
+      setIndicator({
+        left: elRect.left - navRect.left,
+        width: elRect.width,
+      });
+      setHasActive(true);
+    } else {
+      setHasActive(false);
+    }
+  }, [pathname]);
+
+  return (
+    <nav ref={navRef} className="pointer-events-auto">
+      <ul className="glass-nav relative flex items-center gap-1 rounded-full p-1 text-sm font-medium">
+        {hasActive && (
+          <li
+            aria-hidden
+            className="pointer-events-none absolute rounded-full bg-white/60 transition-all duration-300 ease-[cubic-bezier(.4,0,.2,1)] dark:bg-white/10"
+            style={{
+              left: indicator.left,
+              width: indicator.width,
+              top: 4,
+              bottom: 4,
+            }}
+          />
+        )}
+        {navLinks.map(({ to, label }) => {
+          const isActive = pathname === to;
+          return (
+            <li key={to}>
+              <Link
+                to={to}
+                data-active={isActive ? "" : undefined}
+                className={clsx(
+                  "relative block rounded-full px-4 py-1.5 transition-colors duration-200",
+                  isActive
+                    ? "text-zinc-900 dark:text-zinc-100"
+                    : "text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
+                )}
+              >
+                {label}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+}
 
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -23,7 +88,7 @@ function ThemeToggle() {
     <button
       type="button"
       aria-label={mounted ? `Switch to ${otherTheme} theme` : "Toggle theme"}
-      className="group rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
+      className="glass-nav group rounded-full px-3 py-2 transition"
       onClick={() => setTheme(otherTheme)}
     >
       <SunIcon className="h-6 w-6 fill-zinc-100 stroke-zinc-500 transition group-hover:fill-zinc-200 group-hover:stroke-zinc-700 dark:hidden [@media(prefers-color-scheme:dark)]:fill-teal-50 [@media(prefers-color-scheme:dark)]:stroke-teal-500 [@media(prefers-color-scheme:dark)]:group-hover:fill-teal-50 [@media(prefers-color-scheme:dark)]:group-hover:stroke-teal-600" />
@@ -40,7 +105,7 @@ function AvatarContainer({
     <div
       className={clsx(
         className,
-        "h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10"
+        "glass-nav h-10 w-10 rounded-full p-0.5"
       )}
       {...props}
     />
@@ -51,34 +116,33 @@ function Avatar({
   large = false,
   className,
   ...props
-}: Omit<React.ComponentPropsWithoutRef<typeof Link>, "href"> & {
+}: Omit<React.ComponentPropsWithoutRef<typeof Link>, "to"> & {
   large?: boolean;
 }) {
   return (
     <Link
-      href="/"
+      to="/"
       aria-label="Home"
       className={clsx(className, "pointer-events-auto")}
       {...props}
     >
-      <Image
+      <img
         src="/avatar.png"
         width={40}
         height={40}
         alt=""
-        sizes={large ? "4rem" : "2.25rem"}
         className={clsx(
           "rounded-full bg-zinc-100 object-cover dark:bg-zinc-800",
           large ? "h-16 w-16" : "h-9 w-9"
         )}
-        priority
       />
     </Link>
   );
 }
 
 export function Header() {
-  const isHomePage = usePathname() === "/";
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isHomePage = pathname === "/";
 
   const headerRef = useRef<React.ElementRef<"div">>(null);
   const avatarRef = useRef<React.ElementRef<"div">>(null);
@@ -254,7 +318,10 @@ export function Header() {
                   </AvatarContainer>
                 )}
               </div>
-              <div className="flex justify-end md:flex-1">
+              <div className="flex flex-1 justify-center">
+                <Navigation />
+              </div>
+              <div className="flex flex-1 justify-end">
                 <div className="pointer-events-auto">
                   <ThemeToggle />
                 </div>

@@ -1,0 +1,221 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@config "../tailwind.config.ts";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-size-xs: 0.8125rem;
+  --font-size-xs--line-height: 1.5rem;
+  --font-size-sm: 0.875rem;
+  --font-size-sm--line-height: 1.5rem;
+  --font-size-base: 1rem;
+  --font-size-base--line-height: 1.75rem;
+  --font-size-lg: 1.125rem;
+  --font-size-lg--line-height: 1.75rem;
+  --font-size-xl: 1.25rem;
+  --font-size-xl--line-height: 2rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-2xl--line-height: 2rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-3xl--line-height: 2.25rem;
+  --font-size-4xl: 2rem;
+  --font-size-4xl--line-height: 2.5rem;
+  --font-size-5xl: 3rem;
+  --font-size-5xl--line-height: 3.5rem;
+  --font-size-6xl: 3.75rem;
+  --font-size-6xl--line-height: 1;
+  --font-size-7xl: 4.5rem;
+  --font-size-7xl--line-height: 1;
+  --font-size-8xl: 6rem;
+  --font-size-8xl--line-height: 1;
+  --font-size-9xl: 8rem;
+  --font-size-9xl--line-height: 1;
+}
+
+@font-face {
+  font-family: "Geist Sans";
+  src: url("/fonts/GeistVF.woff") format("woff");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMonoVF.woff") format("woff");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+body {
+  font-family: "Geist Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+code, pre {
+  font-family: "Geist Mono", monospace;
+}
+
+/* ── Liquid background blobs ── */
+.liquid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.liquid-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.5;
+  will-change: transform;
+  animation: blob-drift 20s ease-in-out infinite alternate;
+}
+
+.dark .liquid-blob {
+  opacity: 0.25;
+}
+
+.liquid-blob:nth-child(1) {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #2dd4bf 0%, transparent 70%);
+  top: -10%; left: -5%;
+  animation-duration: 22s;
+}
+.liquid-blob:nth-child(2) {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, #f59e0b 0%, transparent 70%);
+  top: 30%; right: -10%;
+  animation-duration: 26s;
+  animation-delay: -5s;
+}
+.liquid-blob:nth-child(3) {
+  width: 450px; height: 450px;
+  background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+  bottom: -5%; left: 20%;
+  animation-duration: 24s;
+  animation-delay: -10s;
+}
+.liquid-blob:nth-child(4) {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, #f43f5e 0%, transparent 70%);
+  top: 60%; left: 50%;
+  animation-duration: 28s;
+  animation-delay: -15s;
+}
+
+@keyframes blob-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(60px, -40px) scale(1.1); }
+  66% { transform: translate(-30px, 50px) scale(0.95); }
+  100% { transform: translate(40px, 20px) scale(1.05); }
+}
+
+/* ── Glass surfaces ── */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.dark .glass-panel {
+  background: rgba(24, 24, 27, 0.55);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+.dark .glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.glass-input:focus {
+  border-color: #2dd4bf;
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.15);
+  outline: none;
+}
+
+.dark .glass-input {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass-input:focus {
+  border-color: #2dd4bf;
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.1);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+.dark .glass-nav {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Coverflow ── */
+.coverflow-stage {
+  perspective: 1000px;
+  perspective-origin: 50% 40%;
+  position: relative;
+  overflow: clip;
+}
+
+.coverflow-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x proximity;
+}
+
+.coverflow-scroll.is-scrolling {
+  scroll-snap-type: none;
+}
+
+.coverflow-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.coverflow-scroll > li {
+  scroll-snap-align: center;
+}
+
+.coverflow-card {
+  will-change: transform, opacity;
+}

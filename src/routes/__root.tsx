@@ -1,8 +1,25 @@
-// import { Button } from '@/components/Button'
+import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { Providers } from "@/src/provider";
+import { Layout } from "@/src/components/Layout";
 import { Container } from "@/src/components/Container";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 
-export default function NotFound() {
+export const Route = createRootRoute({
+  component: RootLayout,
+  notFoundComponent: NotFound,
+});
+
+function RootLayout() {
+  return (
+    <Providers>
+      <Layout>
+        <Outlet />
+      </Layout>
+    </Providers>
+  );
+}
+
+function NotFound() {
   return (
     <Container className="flex h-full items-center pt-16 sm:pt-32">
       <div className="flex flex-col items-center">
@@ -13,9 +30,9 @@ export default function NotFound() {
           Page not found
         </h1>
         <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
-          Sorry, we couldn’t find the page you’re looking for.
+          Sorry, we couldn&apos;t find the page you&apos;re looking for.
         </p>
-        <Link href="/" className="mt-4">
+        <Link to="/" className="mt-4">
           Go back home
         </Link>
       </div>
