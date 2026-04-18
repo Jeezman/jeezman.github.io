@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+/* Wire Tailwind's `dark:` variant to our data-theme attribute.
+ * The FOUC-prevention script sets data-theme="light"|"dark" on <html>
+ * before paint, and the ThemeProvider keeps it in sync at runtime. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Self-hosted fonts — see @fontsource packages */
+@import "@fontsource/righteous/400.css";
+@import "@fontsource-variable/fraunces";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Static brand tokens — shared across light & dark, exposed to Tailwind as
+ * utilities (bg-brand-500, text-accent-500, etc.) via @theme.
+ * ──────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Four type voices with clear roles:
+   *   - editorial: magazine-style section headings (Fraunces variable, soft=50)
+   *   - display:   brand wordmark + display accents (Righteous)
+   *   - mono:      tickers, eyebrows, metadata (IBM Plex Mono)
+   *   - sans:      body & UI (Inter) */
+  --font-editorial: "Fraunces Variable", "Fraunces", ui-serif, Georgia, serif;
+  --font-display: "Righteous", ui-serif, Georgia, serif;
+  --font-mono:
+    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* Brand orange (bitcoin). Primary identity color. */
+  --color-brand-50: #fff4e6;
+  --color-brand-100: #ffe4bf;
+  --color-brand-200: #ffcc87;
+  --color-brand-300: #ffb14e;
+  --color-brand-400: #fa9a28;
+  --color-brand-500: #f7931a;
+  --color-brand-600: #e07d0a;
+  --color-brand-700: #b36105;
+  --color-brand-800: #854700;
+  --color-brand-900: #5a3000;
+
+  /* Lime accent — inherited from the Tauri app's functional accent. */
+  --color-accent-50: #f7fee7;
+  --color-accent-100: #ecfccb;
+  --color-accent-200: #d9f99d;
+  --color-accent-300: #bef264;
+  --color-accent-400: #a3e635;
+  --color-accent-500: #84cc16;
+  --color-accent-600: #65a30d;
+  --color-accent-700: #4d7c0f;
+  --color-accent-800: #3f6212;
+  --color-accent-900: #365314;
+
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Semantic tokens — resolve differently in light vs. dark. US-003 wires the
+ * runtime toggle; for now, default is dark, and [data-theme="light"] on any
+ * ancestor (or <html>) flips the palette.
+ * ──────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Dark palette (default) — anthracite, not pure black. */
+  --surface: #0a0a0a;
+  --surface-muted: #141414;
+  --surface-raised: rgba(255, 255, 255, 0.05);
+  --surface-raised-hover: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --text: #f5f3ee;
+  --text-muted: rgba(245, 243, 238, 0.7);
+  --text-faint: rgba(245, 243, 238, 0.6);
+  /* Orange used as inline text. On dark we pick the lighter variant so it */
+  /* reads clearly (~7:1) against the near-black surface. */
+  --brand-text: #fa9a28; /* brand-400 */
+}
+
+[data-theme="light"] {
+  /* Warm off-white — "bone paper" feel rather than cold white. */
+  --surface: #f5f3ee;
+  --surface-muted: #ebe7de;
+  --surface-raised: rgba(17, 24, 39, 0.04);
+  --surface-raised-hover: rgba(17, 24, 39, 0.08);
+  --border: rgba(17, 24, 39, 0.12);
+  --border-strong: rgba(17, 24, 39, 0.24);
+  --text: #0a0a0a;
+  --text-muted: rgba(10, 10, 10, 0.7);
+  --text-faint: rgba(10, 10, 10, 0.6);
+  --brand-text: #b36105; /* brand-700 */
+}
+
+/* Expose the semantic tokens to Tailwind utilities (`bg-surface`, `text-muted`,
+ * `border-default`, etc.) without losing the var() indirection. */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-raised-hover: var(--surface-raised-hover);
+  --color-border-default: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+  --color-brand-text: var(--brand-text);
+}
+
+/* Global focus-visible fallback — ensures every keyboard-reachable element
+ * shows a ring even if the component forgets to style focus explicitly.
+ * Components that add their own focus-visible ring override this. */
+:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+html,
+body {
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Grain overlay — fixed, low-opacity SVG noise. Gives the whole site a
+ * printed-paper texture that's impossible to pin down but instantly reads
+ * as "this wasn't vibe-coded in a weekend".
+ * ──────────────────────────────────────────────────────────────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 200px 200px;
+}
+
+[data-theme="light"] body::before {
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+}
+
+/* Every interactive region must sit above the grain. */
+header,
+main,
+footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Ticker marquee — infinite horizontal scroll. One track with duplicated
+ * content so the seam is invisible.
+ * ──────────────────────────────────────────────────────────────────────── */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * Fraunces opsz / soft axes — tune editorial face for large display sizes.
+ * Soft=50 rounds the terminals slightly, opsz 144 activates display cut.
+ * ──────────────────────────────────────────────────────────────────────── */
+.font-editorial {
+  font-variation-settings:
+    "opsz" 144,
+    "SOFT" 50,
+    "WONK" 0;
+  letter-spacing: -0.02em;
+}

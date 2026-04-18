@@ -1,12 +1,14 @@
+/// <reference types="vite/client" />
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
+
 import { routeTree } from "./routeTree.gen";
-import "./globals.css";
+import "./styles.css";
 
 const router = createRouter({
   routeTree,
-  basepath: "/",
+  basepath: import.meta.env.BASE_URL,
 });
 
 declare module "@tanstack/react-router" {
@@ -15,8 +17,11 @@ declare module "@tanstack/react-router" {
   }
 }
 
-createRoot(document.getElementById("root")!).render(
+const rootEl = document.getElementById("root");
+if (!rootEl) throw new Error("#root element not found");
+
+createRoot(rootEl).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>
+  </StrictMode>,
 );

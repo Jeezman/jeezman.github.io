@@ -4,10 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 import path from "path";
 
-const isProd = process.env.NODE_ENV === "production";
-
 export default defineConfig({
-  base: isProd ? "/jeezman/" : "/",
+  base: "/",
   plugins: [
     TanStackRouterVite({ routesDirectory: "src/routes" }),
     tailwindcss(),

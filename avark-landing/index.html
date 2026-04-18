@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Avark — Bitcoin without the waiting.</title>
+    <meta
+      name="description"
+      content="A self-custody Bitcoin wallet built on Arkade. Lightning-fast spends, keys that stay yours, no custodian standing between you and your sats."
+    />
+    <meta name="theme-color" content="#F7931A" />
+    <link rel="canonical" href="https://jeezman.github.io/avark/" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%BASE_URL%favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%apple-touch-icon.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Avark" />
+    <meta property="og:title" content="Avark — Bitcoin without the waiting." />
+    <meta
+      property="og:description"
+      content="A self-custody Bitcoin wallet built on Arkade. Lightning-fast spends, keys that stay yours, no custodian standing between you and your sats."
+    />
+    <meta property="og:url" content="https://jeezman.github.io/avark/" />
+    <meta property="og:image" content="https://jeezman.github.io/avark/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Avark — Bitcoin without the waiting." />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Avark — Bitcoin without the waiting." />
+    <meta
+      name="twitter:description"
+      content="A self-custody Bitcoin wallet built on Arkade. Lightning-fast spends, keys that stay yours, no custodian standing between you and your sats."
+    />
+    <meta name="twitter:image" content="https://jeezman.github.io/avark/og.png" />
+    <meta name="twitter:image:alt" content="Avark — Bitcoin without the waiting." />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Avark",
+        "alternateName": "Arkvark",
+        "description": "A self-custody Bitcoin wallet built on Arkade. Lightning-fast spends, keys that stay yours, no custodian standing between you and your sats.",
+        "url": "https://jeezman.github.io/avark/",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "iOS, Android, macOS",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "softwareHelp": "https://github.com/jeezman/avark",
+        "image": "https://jeezman.github.io/avark/og.png",
+        "author": { "@type": "Organization", "name": "Avark", "url": "https://github.com/jeezman/avark" }
+      }
+    </script>
+
+    <script>
+      // Theme FOUC prevention — runs synchronously before any paint. Mirrors the
+      // runtime provider in src/theme/provider.tsx. Keep the storage key and
+      // attribute in sync with THEME_STORAGE_KEY / THEME_ATTRIBUTE.
+      (function () {
+        try {
+          var stored = localStorage.getItem("avark.theme");
+          var pref =
+            stored === "light" || stored === "dark" || stored === "system"
+              ? stored
+              : "system";
+          var resolved =
+            pref === "system"
+              ? window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "light"
+                : "dark"
+              : pref;
+          document.documentElement.setAttribute("data-theme", resolved);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

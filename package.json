@@ -6,7 +6,8 @@
   "homepage": "https://jeezman.github.io",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && pnpm run build:avark",
+    "build:avark": "cd avark-landing && VITE_BASE=/avark/ pnpm run build && cd .. && rm -rf dist/avark && cp -R avark-landing/dist dist/avark",
     "preview": "vite preview",
     "lint": "eslint src",
     "deploy": "gh-pages -d dist"
