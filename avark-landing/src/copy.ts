@@ -14,6 +14,8 @@ export const HERO = {
   subhead:
     "A self-custody Bitcoin wallet built on Arkade. Lightning-fast spends, keys that stay yours, no custodian standing between you and your sats.",
   primaryCta: "View on GitHub",
+  // Used when a release has been published — version is appended at render.
+  releaseCta: "Download",
   secondaryCta: "Learn more",
 } as const;
 

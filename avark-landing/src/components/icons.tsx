@@ -62,6 +62,14 @@ export function CheckIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function DownloadIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 4v12M6 12l6 6 6-6M5 20h14" />
+    </svg>
+  );
+}
+
 export function GithubIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg

@@ -9,8 +9,9 @@ import { useRef } from "react";
 import { Mark } from "../assets/brand";
 import { BRAND, TAGLINE } from "../brand";
 import { HERO } from "../copy";
+import { LATEST_RELEASE } from "../generated/release";
 import { useCtaMotion } from "../motion";
-import { ArrowDownIcon, GithubIcon } from "./icons";
+import { ArrowDownIcon, DownloadIcon, GithubIcon } from "./icons";
 
 const TAGLINE_WORDS = TAGLINE.split(" ");
 
@@ -103,9 +104,12 @@ export function Hero() {
             {HERO.subhead}
           </p>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <PrimaryCta />
-            <SecondaryCta />
+          <div className="flex flex-col items-start gap-3">
+            <div className="flex flex-wrap items-center gap-3">
+              <PrimaryCta />
+              <SecondaryCta />
+            </div>
+            <ReleaseMeta />
           </div>
 
           <MetaRow />
@@ -152,24 +156,49 @@ function MetaRow() {
   );
 }
 
+// When a GitHub release is published, the primary CTA becomes a download link
+// to the release page (so users can pick the right asset for their platform).
+// Without a release, we fall back to the generic "View on GitHub" call.
 function PrimaryCta() {
   const ctaMotion = useCtaMotion();
+  const release = LATEST_RELEASE;
+  const href = release?.htmlUrl ?? BRAND.githubUrl;
+  const label = release ? `${HERO.releaseCta} ${release.version}` : HERO.primaryCta;
+  const Icon = release ? DownloadIcon : GithubIcon;
   return (
     <motion.a
-      href={BRAND.githubUrl}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       {...ctaMotion}
       className="inline-flex items-center gap-2 rounded-full bg-brand-500 px-6 py-3 font-mono text-sm uppercase tracking-[0.15em] text-white shadow-[0_8px_30px_rgb(247,147,26,0.35)] transition-colors hover:bg-brand-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
     >
-      <GithubIcon className="h-4 w-4" />
-      {HERO.primaryCta}
+      <Icon className="h-4 w-4" />
+      {label}
     </motion.a>
   );
 }
 
 function SecondaryCta() {
   const ctaMotion = useCtaMotion();
+  // When a release exists the primary CTA already points off-site to the
+  // release page, so the secondary slot becomes the repo link. Otherwise
+  // it's the on-page "Learn more" anchor.
+  const release = LATEST_RELEASE;
+  if (release) {
+    return (
+      <motion.a
+        href={BRAND.githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        {...ctaMotion}
+        className="inline-flex items-center gap-2 rounded-full border border-border-strong px-6 py-3 font-mono text-sm uppercase tracking-[0.15em] text-text transition-colors hover:bg-surface-raised-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+      >
+        <GithubIcon className="h-4 w-4" />
+        {HERO.primaryCta}
+      </motion.a>
+    );
+  }
   return (
     <motion.a
       href="#features"
@@ -179,6 +208,35 @@ function SecondaryCta() {
       {HERO.secondaryCta}
       <ArrowDownIcon className="h-4 w-4" />
     </motion.a>
+  );
+}
+
+function ReleaseMeta() {
+  const release = LATEST_RELEASE;
+  if (!release) return null;
+
+  const date = new Date(release.publishedAt).toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+  const assetCount = release.assets.length;
+  const assetLabel = assetCount === 1 ? "1 asset" : `${assetCount} assets`;
+
+  return (
+    <a
+      href={release.htmlUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-text-muted transition-colors hover:text-text"
+    >
+      <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand-500" />
+      <span>{release.prerelease ? "Prerelease" : "Latest"}</span>
+      <span className="opacity-40">·</span>
+      <span>{date}</span>
+      <span className="opacity-40">·</span>
+      <span>{assetLabel}</span>
+    </a>
   );
 }
 
