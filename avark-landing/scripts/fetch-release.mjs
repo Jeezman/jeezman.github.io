@@ -1,11 +1,12 @@
 // Fetches the latest release from the Avark GitHub repo and emits a typed
-// module the site imports synchronously. Runs as a `predev` / `prebuild` hook
-// so the generated file is always fresh and visitors never hit GitHub at
-// runtime (avoids the 60-req/hr unauthenticated rate limit).
+// module used as the initial value for the Hero's release CTA. Runs as a
+// `predev` / `prebuild` hook so first paint is always reasonable; the client
+// then refreshes from the GitHub API at runtime so a new release shows up
+// without requiring a rebuild & redeploy.
 //
 // Resilient by design: a failed fetch (offline, rate-limited, repo private)
 // writes a `null` stub so the build never breaks — the Hero falls back to its
-// generic GitHub CTA.
+// generic GitHub CTA until the runtime fetch succeeds.
 //
 // Note: we use the /releases list endpoint (not /releases/latest) because the
 // latter skips prereleases, and the current Avark release is a prerelease.

@@ -9,8 +9,8 @@ import { useRef } from "react";
 import { Mark } from "../assets/brand";
 import { BRAND, TAGLINE } from "../brand";
 import { HERO } from "../copy";
-import { LATEST_RELEASE } from "../generated/release";
 import { useCtaMotion } from "../motion";
+import { useLatestRelease, type ReleaseInfo } from "../release";
 import { ArrowDownIcon, DownloadIcon, GithubIcon } from "./icons";
 
 const TAGLINE_WORDS = TAGLINE.split(" ");
@@ -18,6 +18,7 @@ const TAGLINE_WORDS = TAGLINE.split(" ");
 export function Hero() {
   const reduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
+  const release = useLatestRelease();
 
   // Scroll-linked parallax: tracks from the moment the hero top hits the
   // viewport top until the hero bottom leaves the viewport top. We derive
@@ -106,10 +107,10 @@ export function Hero() {
 
           <div className="flex flex-col items-start gap-3">
             <div className="flex flex-wrap items-center gap-3">
-              <PrimaryCta />
-              <SecondaryCta />
+              <PrimaryCta release={release} />
+              <SecondaryCta release={release} />
             </div>
-            <ReleaseMeta />
+            <ReleaseMeta release={release} />
           </div>
 
           <MetaRow />
@@ -159,9 +160,8 @@ function MetaRow() {
 // When a GitHub release is published, the primary CTA becomes a download link
 // to the release page (so users can pick the right asset for their platform).
 // Without a release, we fall back to the generic "View on GitHub" call.
-function PrimaryCta() {
+function PrimaryCta({ release }: { release: ReleaseInfo | null }) {
   const ctaMotion = useCtaMotion();
-  const release = LATEST_RELEASE;
   const href = release?.htmlUrl ?? BRAND.githubUrl;
   const label = release ? `${HERO.releaseCta} ${release.version}` : HERO.primaryCta;
   const Icon = release ? DownloadIcon : GithubIcon;
@@ -179,12 +179,11 @@ function PrimaryCta() {
   );
 }
 
-function SecondaryCta() {
+function SecondaryCta({ release }: { release: ReleaseInfo | null }) {
   const ctaMotion = useCtaMotion();
   // When a release exists the primary CTA already points off-site to the
   // release page, so the secondary slot becomes the repo link. Otherwise
   // it's the on-page "Learn more" anchor.
-  const release = LATEST_RELEASE;
   if (release) {
     return (
       <motion.a
@@ -211,8 +210,7 @@ function SecondaryCta() {
   );
 }
 
-function ReleaseMeta() {
-  const release = LATEST_RELEASE;
+function ReleaseMeta({ release }: { release: ReleaseInfo | null }) {
   if (!release) return null;
 
   const date = new Date(release.publishedAt).toLocaleDateString(undefined, {

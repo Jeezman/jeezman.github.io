@@ -33,5 +33,6 @@
     "gh-pages": "^6.2.0",
     "typescript": "^5",
     "vite": "^6.0.0"
-  }
+  },
+  "packageManager": "pnpm@11.1.1"
 }
